@@ -27,7 +27,7 @@ A conflict might or might not arise in the group in the near future but when it 
 
 
 1.6 Academic Integrity: (Safiyan)
-
+As our unit allows usage of AI tools, we must ensuure that it is in accordance with university regulations which means our work must be original and if AI Generated, those specific parts must be appropriately cited. Before being submitted, every code produced by AI will be properly identified and documented, examined by every member, and comprehended.All team members must ensure that they understand the logic and reasoning behind the AI Generated codes. The team will make sure the finished project shows shared understanding and accountability, and proper attribution will be included.
 
 
 --------------------------------------------------
