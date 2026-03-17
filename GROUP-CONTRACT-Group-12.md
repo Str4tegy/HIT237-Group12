@@ -8,7 +8,7 @@ Section 1: Terms and Conditions of Group Work
 --------------------------------------------------
 1.1 Group Allocation: (Jorge)
 
-
+To promote a collaborative teamwork dynamic rather than a competitive one, grades will be shared equally with all 4 team members, should they make a fair contribution to the project. A fair contribution to the project would include completing all tasks assigned and agreed upon at team meetings. Should a member not complete their allocated tasks within a reasonable timeframe (causing a considerable amount of the workload to be redistributed to the other team members) then their mark amongst the team should be discussed within the next team meeting.
 
 1.2 Communication: (Pana)
 
@@ -16,7 +16,7 @@ To communicate across all tasks, our team will commit to using Microsoft Teams t
 
 1.3 Task Ownership: (Jorge)
 
-
+In early team meetings, the strengths, and preferences of each group member should be discussed so that in each team meeting the team can allocate tasks to each member according to their skills. In each team meeting, the current assignments each member has should be discussed so that responsibilities and deadlines are always clear. Updates on progress should also be regularly made, a post in the Teams or in a team meeeting. Should a member have an issue that might interfere with making a deadline they should immediately discuss a solution, whether it be counselling help from other members or potentially swapping for a later task that another member (who would be able to make the deadline) was assigned, if the member's issue is not communicated, then the rest of the team should pick up the task and discuss alterations to the group allocation in the next meeting.
 
 1.4 Diverse Working Styles: (Pana)
 
