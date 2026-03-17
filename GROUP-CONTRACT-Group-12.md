@@ -23,7 +23,7 @@ In early team meetings, the strengths, and preferences of each group member shou
 It is anticipated that not every team member will share the same schedule as each other due to personal, work, or other commitments outside of the tasks. To adapt to this, different tasks will be assigned to each team member as early as possible to ensure everyone has a chance to work on their task during their preferred hours. Each member is responsible for informing the group at least 24 hours in advance if a delay or inconvenience occurs that prevents them from attending a scheduled meeting. 
 
 1.5 Conflict Resolution: (Safiyan)
-
+A conflict might or might not arise in the group in the near future but when it does, our first step would be having a discussion collectively and making sure everyone has their perspective presented and acknowledged. If the conflict cannot be resolved internally after a reasonable discussion, we escalate by documenting the concern and proposing possible solutions to the group. However, if an agreement is not achieved, we will have to contact our Collaborative Learning Facilitator (CLF) at the next checkpoint or sooner if it hinders our progress whilst providing a summary of our concerns and proposed solutions to our CLF.
 
 
 1.6 Academic Integrity: (Safiyan)
