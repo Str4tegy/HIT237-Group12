@@ -64,20 +64,23 @@ Each team member will be resposible for aknowledging key milestones for each ass
 
 2.2 Task Breakdowns Showing how the Assessed Topics Will be tackled and by whom: (Kosta)
 
+Each task will be distributed based on our individual strengths, while ensuring each member has contributed to both implementation and the ADR (Architectural Decision Record).
+General task allocation:
+ - Jorge is responsible for designing Django models and relationships such as recordings, species, users and ensuring proper use of Django APIs.
+ - Kosta is responsible for implementing core features, including  audio submission for researchers, anomaly flagging, and coordinating GitHub merges.
+ - Pana is responsible for implementing class-based views, templates, and timeline interface for displaying recordings. Ensures adherence to Django design philosophies, including the principle of "Don't Repeat Yourself” (DRY).
+ - Safiyan is responsible for the Architectural Decision Record (ADR), documenting all major design decisions, alternatives, and consequences. Ensures there are clear connections between decisions and the code.
+ - Everyone is responsible for testing code, and updating the project plan when appropriate
 
 2.3 Internal Checkpoints or Review Points where the Team will Assess Progress: (Kosta)
 
 At least once a week the group will conduct meetings on MS Teams to assess progress, create internal checkpoints, and discuss how to move forward. These meetings will be held every week on:
-_________________________________
-|<u> THURSDAY 6:00pm (Darwin Time) </u>| 
-
-If ever there is an emergency of any sort, or a deadline just before the said date, additional meetings may be held/moved appropriately. The interal checkpoints will be documented clearly in the Meeting Minutes after Teams meetings. These will briefly outline all the tasks that need to be completed, when, and by which member/s.
-Upon finishing assessments, a final review will be held, either in a call or through discussion on Teams before submitting.
+ - THURSDAY 6:00pm (Darwin Time)
+If ever there is an emergency of any sort, or a deadline just before the said date, additional meetings may be held/moved appropriately. The internal checkpoints will be documented clearly in the Meeting Minutes after Teams meetings. These will briefly outline all the tasks that need to be completed, when, and by which member/s. Upon finishing assessments, a final review will be held, either in a call or through discussion on Teams before submitting.
 
 2.4 Integration Points where Individual Work Will be Merged and Tested Together: (Kosta)
 
-
-
+Checkpoints recorded by the CLF will be used as merging points for individual work. Around the time of each checkpoint. All currently working features should be integrated (audio submission, viewing, anomaly flagging), with bugs tested.
 
 
 Temporary notes:
