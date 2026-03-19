@@ -65,8 +65,14 @@ Each team member will be resposible for aknowledging key milestones for each ass
 2.2 Task Breakdowns Showing how the Assessed Topics Will be tackled and by whom: (Kosta)
 
 
-2.3 Internal Checkpoints or Review Points where the Team will Assess Progress: (Kosta) (Note from Pana: I think add a table with weekly meeting schedules under this section e.g: every Wednesday 3:00pm)
+2.3 Internal Checkpoints or Review Points where the Team will Assess Progress: (Kosta)
 
+At least once a week the group will conduct meetings on MS Teams to assess progress, create internal checkpoints, and discuss how to move forward. These meetings will be held every week on:
+_________________________________
+|<u> THURSDAY 6:00pm (Darwin Time) </u>| 
+
+If ever there is an emergency of any sort, or a deadline just before the said date, additional meetings may be held/moved appropriately. The interal checkpoints will be documented clearly in the Meeting Minutes after Teams meetings. These will briefly outline all the tasks that need to be completed, when, and by which member/s.
+Upon finishing assessments, a final review will be held, either in a call or through discussion on Teams before submitting.
 
 2.4 Integration Points where Individual Work Will be Merged and Tested Together: (Kosta)
 
