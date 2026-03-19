@@ -81,4 +81,4 @@ If ever there is an emergency of any sort, or a deadline just before the said da
 
 2.4 Integration Points where Individual Work Will be Merged and Tested Together: (Kosta)
 
-Checkpoints recorded by the CLF will be used as merging points for individual work. Around the time of each checkpoint. All currently working features should be integrated (audio submission, viewing, anomaly flagging), with bugs tested.
+Checkpoints recorded by the CLF will be used as merging points for individual work. Around the time of each checkpoint, all currently working features should be integrated (audio submission, viewing, anomaly flagging), with bugs tested.
