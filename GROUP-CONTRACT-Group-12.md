@@ -62,6 +62,7 @@ Each team member will be resposible for aknowledging key milestones for each ass
 |      28/05/26     |         Submit Assessment 4         |
 |___________________|_____________________________________|
 
+
 2.2 Task Breakdowns Showing how the Assessed Topics Will be tackled and by whom: (Kosta)
 
 Each task will be distributed based on our individual strengths, while ensuring each member has contributed to both implementation and the ADR (Architectural Decision Record).
@@ -81,12 +82,3 @@ If ever there is an emergency of any sort, or a deadline just before the said da
 2.4 Integration Points where Individual Work Will be Merged and Tested Together: (Kosta)
 
 Checkpoints recorded by the CLF will be used as merging points for individual work. Around the time of each checkpoint. All currently working features should be integrated (audio submission, viewing, anomaly flagging), with bugs tested.
-
-
-Temporary notes:
-We MAY eventually need to delete the headings ive included in section 2 but not sure yet. 
-And also the name labels on the headings as they are just to guide. 
-
-
-
-
