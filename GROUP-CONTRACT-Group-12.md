@@ -1,7 +1,7 @@
 # HIT237-Group12
 
 Project Theme:
-
+Theme 5. Listening to NT's Disappearing Animals
 
 --------------------------------------------------
 Section 1: Terms and Conditions of Group Work
@@ -23,10 +23,11 @@ In early team meetings, the strengths, and preferences of each group member shou
 It is anticipated that not every team member will share the same schedule as each other due to personal, work, or other commitments outside of the tasks. To adapt to this, different tasks will be assigned to each team member as early as possible to ensure everyone has a chance to work on their task during their preferred hours. Each member is responsible for informing the group at least 24 hours in advance if a delay or inconvenience occurs that prevents them from attending a scheduled meeting. 
 
 1.5 Conflict Resolution: (Safiyan)
+
 A conflict might or might not arise in the group in the near future but when it does, our first step would be having a discussion collectively and making sure everyone has their perspective presented and acknowledged. If the conflict cannot be resolved internally after a reasonable discussion, we escalate by documenting the concern and proposing possible solutions to the group. However, if an agreement is not achieved, we will have to contact our Collaborative Learning Facilitator (CLF) at the next checkpoint or sooner if it hinders our progress whilst providing a summary of our concerns and proposed solutions to our CLF.
 
-
 1.6 Academic Integrity: (Safiyan)
+
 As our unit allows usage of AI tools, we must ensuure that it is in accordance with university regulations which means our work must be original and if AI Generated, those specific parts must be appropriately cited. Before being submitted, every code produced by AI will be properly identified and documented, examined by every member, and comprehended.All team members must ensure that they understand the logic and reasoning behind the AI Generated codes. The team will make sure the finished project shows shared understanding and accountability, and proper attribution will be included.
 
 
@@ -61,7 +62,6 @@ Each team member will be resposible for aknowledging key milestones for each ass
 |-------------------|-------------------------------------|
 |      28/05/26     |         Submit Assessment 4         |
 |___________________|_____________________________________|
-
 
 2.2 Task Breakdowns Showing how the Assessed Topics Will be tackled and by whom: (Kosta)
 
