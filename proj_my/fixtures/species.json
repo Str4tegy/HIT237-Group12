@@ -1,0 +1,182 @@
+[
+  {
+    "model": "species.taxonomicclass",
+    "pk": 1,
+    "fields": {
+      "name": "Mammalia",
+      "common_name": "Mammals",
+      "description": "Warm-blooded vertebrates characterised by hair and live birth."
+    }
+  },
+  {
+    "model": "species.taxonomicclass",
+    "pk": 2,
+    "fields": {
+      "name": "Aves",
+      "common_name": "Birds",
+      "description": "Feathered, warm-blooded vertebrates with beaks."
+    }
+  },
+  {
+    "model": "species.taxonomicclass",
+    "pk": 3,
+    "fields": {
+      "name": "Reptilia",
+      "common_name": "Reptiles",
+      "description": "Cold-blooded vertebrates with scales."
+    }
+  },
+  {
+    "model": "species.taxonomicclass",
+    "pk": 4,
+    "fields": {
+      "name": "Amphibia",
+      "common_name": "Amphibians",
+      "description": "Cold-blooded vertebrates that can live in water and on land."
+    }
+  },
+  {
+    "model": "species.species",
+    "pk": 1,
+    "fields": {
+      "scientific_name": "Dasyurus hallucatus",
+      "common_name": "Northern Quoll",
+      "taxonomic_class": 1,
+      "family": "Dasyuridae",
+      "genus": "Dasyurus",
+      "conservation_status": "EN",
+      "origin": "endemic",
+      "known_range_description": "Patchy distribution across northern Australia, including Arnhem Land escarpment and some NT coastal regions.",
+      "range_centroid_lat": "-13.750000",
+      "range_centroid_lng": "132.930000",
+      "description": "Australia's most endangered native carnivore. Nocturnal and solitary, with distinctive spotted coat. Produces a range of vocalisations including hisses and churring calls.",
+      "ala_taxon_id": "urn:lsid:biodiversity.org.au:afd.taxon:cf1657f0-3b95-4ef0-89c4-9e3ab1793060"
+    }
+  },
+  {
+    "model": "species.species",
+    "pk": 2,
+    "fields": {
+      "scientific_name": "Macroderma gigas",
+      "common_name": "Ghost Bat",
+      "taxonomic_class": 1,
+      "family": "Megadermatidae",
+      "genus": "Macroderma",
+      "conservation_status": "VU",
+      "origin": "native",
+      "known_range_description": "Rocky gorge systems and caves across the NT, including Nitmiluk and areas near Alice Springs.",
+      "range_centroid_lat": "-17.500000",
+      "range_centroid_lng": "133.000000",
+      "description": "Australia's only carnivorous bat. Uses echolocation clicks as well as social vocalisations. Roosts in colonies in caves and mine shafts.",
+      "ala_taxon_id": ""
+    }
+  },
+  {
+    "model": "species.species",
+    "pk": 3,
+    "fields": {
+      "scientific_name": "Varanus giganteus",
+      "common_name": "Perentie",
+      "taxonomic_class": 3,
+      "family": "Varanidae",
+      "genus": "Varanus",
+      "conservation_status": "LC",
+      "origin": "native",
+      "known_range_description": "Arid and semi-arid regions of central and western NT. Australia's largest lizard.",
+      "range_centroid_lat": "-23.000000",
+      "range_centroid_lng": "133.880000",
+      "description": "Australia's largest lizard, reaching up to 2.5m. Produces a deep hissing exhalation when threatened. Found in rocky outcrops and desert plains.",
+      "ala_taxon_id": ""
+    }
+  },
+  {
+    "model": "species.species",
+    "pk": 4,
+    "fields": {
+      "scientific_name": "Litoria caerulea",
+      "common_name": "Australian Green Tree Frog",
+      "taxonomic_class": 4,
+      "family": "Pelodryadidae",
+      "genus": "Litoria",
+      "conservation_status": "LC",
+      "origin": "native",
+      "known_range_description": "Widespread across northern and eastern Australia. Common in the Top End NT near water sources and vegetation.",
+      "range_centroid_lat": "-14.500000",
+      "range_centroid_lng": "132.200000",
+      "description": "One of Australia's most recognisable frogs. Produces a loud, slow 'croak' call, particularly active during the wet season. Often found near human dwellings.",
+      "ala_taxon_id": ""
+    }
+  },
+  {
+    "model": "species.species",
+    "pk": 5,
+    "fields": {
+      "scientific_name": "Geopelia cuneata",
+      "common_name": "Diamond Dove",
+      "taxonomic_class": 2,
+      "family": "Columbidae",
+      "genus": "Geopelia",
+      "conservation_status": "LC",
+      "origin": "native",
+      "known_range_description": "Widespread across arid and semi-arid Australia, including central NT. Found near water in dry inland areas.",
+      "range_centroid_lat": "-21.000000",
+      "range_centroid_lng": "134.000000",
+      "description": "Australia's smallest dove. Produces a soft, mournful cooing call. Often seen in pairs foraging on the ground.",
+      "ala_taxon_id": ""
+    }
+  },
+  {
+    "model": "species.species",
+    "pk": 6,
+    "fields": {
+      "scientific_name": "Dromaius novaehollandiae",
+      "common_name": "Emu",
+      "taxonomic_class": 2,
+      "family": "Dromaiidae",
+      "genus": "Dromaius",
+      "conservation_status": "LC",
+      "origin": "native",
+      "known_range_description": "Widespread across mainland Australia including most of the NT. Absent from dense rainforest and very arid central regions.",
+      "range_centroid_lat": "-19.000000",
+      "range_centroid_lng": "133.500000",
+      "description": "Australia's largest bird. Produces a deep booming drum call, made by females. Males produce a grunting sound. Notable for the Beetaloo region population.",
+      "ala_taxon_id": ""
+    }
+  },
+  {
+    "model": "species.species",
+    "pk": 7,
+    "fields": {
+      "scientific_name": "Rhinonicteris aurantia",
+      "common_name": "Orange Leaf-nosed Bat",
+      "taxonomic_class": 1,
+      "family": "Hipposideridae",
+      "genus": "Rhinonicteris",
+      "conservation_status": "VU",
+      "origin": "endemic",
+      "known_range_description": "Restricted to the Pilbara (WA) and Top End NT, particularly the Beetaloo Sub-basin and surrounding cave systems. Listed as of critical concern in the Beetaloo region.",
+      "range_centroid_lat": "-16.300000",
+      "range_centroid_lng": "134.200000",
+      "description": "A small, bright-orange bat of high conservation significance in the Beetaloo Sub-basin. Highly sensitive to roost disturbance. Produces high-frequency echolocation calls.",
+      "ala_taxon_id": ""
+    }
+  },
+  {
+    "model": "species.species",
+    "pk": 8,
+    "fields": {
+      "scientific_name": "Amytornis merrotsyi",
+      "common_name": "Thick-billed Grasswren",
+      "taxonomic_class": 2,
+      "family": "Maluridae",
+      "genus": "Amytornis",
+      "conservation_status": "EN",
+      "origin": "endemic",
+      "known_range_description": "Highly restricted range in central-southern NT and northern South Australia. Found in dense lignum and samphire shrublands.",
+      "range_centroid_lat": "-25.500000",
+      "range_centroid_lng": "135.200000",
+      "description": "A cryptic, ground-dwelling bird with a distinctive rattling call. One of Australia's least-studied birds. Extremely sensitive to habitat change.",
+      "ala_taxon_id": ""
+    }
+  }
+]
