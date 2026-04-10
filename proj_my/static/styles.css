@@ -1,0 +1,26 @@
+* {
+    padding: 0px;
+    margin: 0px;
+    box-sizing: border-box;
+}
+
+:root {
+    --header-colour: #333;
+    --background-colour: #f0f0f0;
+    --black: #000;
+    --white: #fff;
+    --feint-text-colour: #666;
+    --link-colour: #0066cc;
+
+    --base-font-size: 16px;
+    --font-family: 'Arial', sans-serif;
+
+}
+
+header {
+    background-color: var(--header-colour);
+    color: white;
+    padding: 1rem;
+    text-align: center;
+}
+
