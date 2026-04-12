@@ -1,19 +1,5 @@
 """
 submissions/models.py
-
-Data models for user-submitted audio recording entries.
-
-Pana's responsibility:
-  - AudioSubmission: the core entry model
-  - SubmissionFlag: the anomaly flagging model (through-style relationship)
-
-Django philosophy demonstrated:
-  - DRY: Validation logic (confidence score range, coordinate bounds)
-    lives in model clean() methods — never duplicated in views or forms
-  - Loose coupling: This app imports from species and accounts, but
-    moderation imports from here — dependency direction is one-way
-  - Explicit is better than implicit: FlagStatus choices are string
-    constants defined on the model, making the state machine auditable
 """
 
 from django.conf import settings
@@ -23,7 +9,7 @@ from django.db import models
 from django.urls import reverse
 
 from species.models import Species
-
+from .managers import AudioSubmissionManager
 
 class AudioSubmission(models.Model):
     """
@@ -42,10 +28,10 @@ class AudioSubmission(models.Model):
       - confidence_score stored as integer 1–100 to avoid float precision
         issues when filtering/sorting
     """
+    objects = AudioSubmissionManager()
 
-    # ------------------------------------------------------------------ #
-    # Core fields                                                         #
-    # ------------------------------------------------------------------ #
+    # Core fields                                                        
+    
     submitter = models.ForeignKey(
         settings.AUTH_USER_MODEL,
         on_delete=models.CASCADE,
@@ -57,18 +43,17 @@ class AudioSubmission(models.Model):
         on_delete=models.PROTECT,   # Don't delete submissions if species is removed
         related_name="submissions",
     )
+ 
+    # Audio recording                                                     
 
-    # ------------------------------------------------------------------ #
-    # Audio recording                                                     #
-    # ------------------------------------------------------------------ #
     audio_file = models.FileField(
         upload_to="submissions/audio/%Y/%m/",
         help_text="Audio recording of the species call (MP3, WAV, OGG).",
     )
 
-    # ------------------------------------------------------------------ #
-    # Capture metadata                                                    #
-    # ------------------------------------------------------------------ #
+
+    # Capture metadata                                                    
+
     captured_at = models.DateTimeField(
         help_text="Date and time the recording was made (UTC).",
     )
