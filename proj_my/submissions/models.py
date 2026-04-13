@@ -75,10 +75,10 @@ class AudioSubmission(models.Model):
         help_text="Optional plain-text location description (e.g. 'Litchfield NP, near Florence Falls').",
     )
 
-    # ------------------------------------------------------------------ #
-    # Confidence score                                                    #
-    # Submitter's certainty of the species identification, 1–100         #
-    # ------------------------------------------------------------------ #
+
+    # Confidence score                                                   
+    # Submitter's certainty of the species identification, 1–100        
+ 
     confidence_score = models.PositiveSmallIntegerField(
         validators=[MinValueValidator(1), MaxValueValidator(100)],
         help_text="How certain are you of the species ID? (1 = uncertain, 100 = certain)",
@@ -183,7 +183,7 @@ class AudioSubmission(models.Model):
             # Composite index for the database page filter (species + time)
             models.Index(
                 fields=["species", "-captured_at"],
-                name="idx_submission_species_captured",
+                name="idx_sub_species_cap",
             ),
         ]
 
