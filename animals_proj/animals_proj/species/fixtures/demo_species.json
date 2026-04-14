@@ -1,0 +1,47 @@
+[
+  {
+    "model": "species.species",
+    "pk": 1,
+    "fields": {
+      "scientific_name": "Dasyurus hallucatus",
+      "common_name": "Northern Quoll",
+      "taxon_class": "Mammal",
+      "conservation_status": "Endangered",
+      "is_endemic": false,
+      "reference_latitude": "-12.463400",
+      "reference_longitude": "130.845600",
+      "reference_url": "https://nt.gov.au/environment/animals/threatened-animals",
+      "notes": "Small carnivorous marsupial found across northern Australia, including the NT."
+    }
+  },
+  {
+    "model": "species.species",
+    "pk": 2,
+    "fields": {
+      "scientific_name": "Erythrura gouldiae",
+      "common_name": "Gouldian Finch",
+      "taxon_class": "Bird",
+      "conservation_status": "Endangered",
+      "is_endemic": false,
+      "reference_latitude": "-14.465000",
+      "reference_longitude": "132.263000",
+      "reference_url": "https://nt.gov.au/environment/animals/threatened-animals",
+      "notes": "Iconic finch species whose populations are monitored in the tropical savannas of the NT."
+    }
+  },
+  {
+    "model": "species.species",
+    "pk": 3,
+    "fields": {
+      "scientific_name": "Limnodynastes convexiusculus",
+      "common_name": "Marbled Frog",
+      "taxon_class": "Amphibian",
+      "conservation_status": "Least Concern",
+      "is_endemic": false,
+      "reference_latitude": "-12.108000",
+      "reference_longitude": "134.894000",
+      "reference_url": "https://data.nt.gov.au/",
+      "notes": "Example amphibian entry for testing acoustic fauna records."
+    }
+  }
+]

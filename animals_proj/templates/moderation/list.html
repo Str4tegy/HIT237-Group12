@@ -1,0 +1,36 @@
+{% extends 'base.html' %}
+
+{% block title %}Moderation queue{% endblock %}
+
+{% block content %}
+<section class="card">
+  <div class="section-heading">
+    <h2>Moderation queue</h2>
+  </div>
+  <form class="filters" method="get">
+    <select name="state">
+      <option value="open" {% if state == 'open' %}selected{% endif %}>Open flags</option>
+      <option value="reviewed" {% if state == 'reviewed' %}selected{% endif %}>Reviewed flags</option>
+      <option value="all" {% if state == 'all' %}selected{% endif %}>All flags</option>
+    </select>
+    <button type="submit">Apply</button>
+  </form>
+</section>
+
+<div class="timeline">
+  {% for flag in flags %}
+    <article class="card timeline-item">
+      <h3><a href="{% url 'moderation:detail' flag.id %}">Flag #{{ flag.id }}</a></h3>
+      <p>Submission: <a href="{{ flag.submission.get_absolute_url }}">{{ flag.submission }}</a></p>
+      <p>Species: {{ flag.submission.species }}</p>
+      <p>Reporter: {{ flag.reporter|default:'Unknown user' }}</p>
+      <p>Reason: {{ flag.reason }}</p>
+      <p>Decision: {{ flag.get_decision_display }}</p>
+      <p>Reviewed: {{ flag.reviewed|yesno:'Yes,No' }}</p>
+      <a class="button" href="{% url 'moderation:review' flag.id %}">Review</a>
+    </article>
+  {% empty %}
+    <div class="card"><p>No flags matched the selected state.</p></div>
+  {% endfor %}
+</div>
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Flag submission{% endblock %}
+
+{% block content %}
+<section class="card narrow">
+  <h2>Flag submission #{{ submission.id }}</h2>
+  <p>You are flagging <strong>{{ submission.species }}</strong> for moderator review.</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Submit flag</button>
+  </form>
+</section>
+{% endblock %}

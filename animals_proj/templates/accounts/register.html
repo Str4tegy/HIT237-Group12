@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Register{% endblock %}
+
+{% block content %}
+<section class="card narrow">
+  <h2>Create an account</h2>
+  <p>New accounts are created as unverified users. Use the admin panel to verify researchers or citizen scientists for submission access.</p>
+  <form method="post">
+    {% csrf_token %}
+    {{ form.as_p }}
+    <button type="submit">Register</button>
+  </form>
+</section>
+{% endblock %}

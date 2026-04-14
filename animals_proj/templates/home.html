@@ -1,0 +1,53 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<section class="hero card">
+  <div>
+    <p class="eyebrow">Group Project Demo</p>
+    <h1>Track NT fauna recordings in one place</h1>
+    <p>
+      Researchers and citizen scientists can log animal calls, attach metadata,
+      and flag unusual observations for moderator review.
+    </p>
+  </div>
+  <div class="hero-actions">
+    <a class="button" href="{% url 'species:list' %}">Browse species database</a>
+    <a class="button secondary" href="{% url 'submissions:list' %}">View recent submissions</a>
+  </div>
+</section>
+
+<section>
+  <div class="section-heading">
+    <h2>Recent entries timeline</h2>
+    <a href="{% url 'submissions:list' %}">Open all submissions</a>
+  </div>
+
+  {% if recent_entries %}
+    <div class="timeline">
+      {% for entry in recent_entries %}
+        <article class="card timeline-item">
+          <p class="muted">{{ entry.created_at|date:'j M Y, g:i a' }}</p>
+          <h3><a href="{{ entry.get_absolute_url }}">{{ entry.species }}</a></h3>
+          <p>
+            Submitted by
+            {% if entry.submitter %}
+              <a href="{% url 'accounts:profile' entry.submitter.username %}">{{ entry.submitter.username }}</a>
+            {% else %}
+              Unknown user
+            {% endif %}
+          </p>
+          <p>Status: <strong>{{ entry.get_status_display }}</strong></p>
+          {% if entry.coordinate_string %}
+            <p>Coordinates: <code>{{ entry.coordinate_string }}</code></p>
+          {% endif %}
+          <p>Flags raised: {{ entry.flag_count }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="card">
+      <p>No submissions yet. Add species data and create a recording to populate the timeline.</p>
+    </div>
+  {% endif %}
+</section>
+{% endblock %}

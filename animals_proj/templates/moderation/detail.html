@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+{% block title %}Flag {{ flag.id }}{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>Flag #{{ flag.id }}</h2>
+  <p>Submission: <a href="{{ flag.submission.get_absolute_url }}">{{ flag.submission }}</a></p>
+  <p>Reporter: {{ flag.reporter|default:'Unknown user' }}</p>
+  <p>Reason: {{ flag.reason }}</p>
+  <p>Decision: {{ flag.get_decision_display }}</p>
+  <p>Reviewer notes: {{ flag.reviewer_notes|default:'Not supplied' }}</p>
+  <a class="button" href="{% url 'moderation:review' flag.id %}">Open review form</a>
+</section>
+{% endblock %}
