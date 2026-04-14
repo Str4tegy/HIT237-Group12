@@ -14,7 +14,7 @@ python -m venv .venv
 # macOS/Linux
 source .venv/bin/activate
 
-pip install -r ../requirements.txt
+pip install django
 python manage.py migrate
 python manage.py loaddata animals_proj/species/fixtures/demo_species.json
 python manage.py createsuperuser
