@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block title %}Submission form{% endblock %}
+
+{% block content %}
+<section class="card narrow">
+  <h2>{% if form.instance.pk %}Edit submission{% else %}New submission{% endif %}</h2>
+  <form method="post" enctype="multipart/form-data">
+    {% csrf_token %}
+    {{ form.non_field_errors }}
+    {% for field in form %}
+      <div class="form-row">
+        {{ field.label_tag }}
+        {{ field }}
+        {% if field.help_text %}<p class="muted">{{ field.help_text }}</p>{% endif %}
+        {{ field.errors }}
+      </div>
+    {% endfor %}
+    <button type="submit">Save submission</button>
+  </form>
+  <div id="species-results" class="autocomplete-results"></div>
+</section>
+{% endblock %}
+
+{% block scripts %}
+<script>
+  const speciesInput = document.getElementById('id_species_query');
+  const speciesSelect = document.getElementById('id_species');
+  const resultsBox = document.getElementById('species-results');
+
+  if (speciesInput && speciesSelect) {
+    speciesInput.addEventListener('input', async (event) => {
+      const query = event.target.value.trim();
+      if (!query) {
+        resultsBox.innerHTML = '';
+        return;
+      }
+      const response = await fetch(`/species/autocomplete/?q=${encodeURIComponent(query)}`);
+      const data = await response.json();
+      resultsBox.innerHTML = '';
+      data.results.forEach((item) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = 'autocomplete-option';
+        button.textContent = `${item.label} (${item.scientific_name})`;
+        button.addEventListener('click', () => {
+          speciesInput.value = item.label;
+          speciesSelect.value = item.id;
+          resultsBox.innerHTML = '';
+        });
+        resultsBox.appendChild(button);
+      });
+    });
+  }
+</script>
+{% endblock %}

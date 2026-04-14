@@ -1,0 +1,48 @@
+{% extends 'base.html' %}
+
+{% block title %}Submissions{% endblock %}
+
+{% block content %}
+<section class="card">
+  <div class="section-heading">
+    <h2>Audio submissions</h2>
+    {% if user.is_authenticated %}<a class="button" href="{% url 'submissions:create' %}">New submission</a>{% endif %}
+  </div>
+  <form class="filters" method="get">
+    <input type="text" name="q" placeholder="Search species, notes, or submitter" value="{{ query }}">
+    <select name="status">
+      <option value="">Any status</option>
+      {% for value, label in status_choices %}
+        <option value="{{ value }}" {% if value == status %}selected{% endif %}>{{ label }}</option>
+      {% endfor %}
+    </select>
+    {% if user.is_authenticated %}
+      <label><input type="checkbox" name="mine" value="1" {% if mine %}checked{% endif %}> My submissions only</label>
+    {% endif %}
+    <button type="submit">Apply</button>
+  </form>
+</section>
+
+<div class="timeline">
+  {% for submission in submissions %}
+    <article class="card timeline-item">
+      <h3><a href="{{ submission.get_absolute_url }}">{{ submission.species }}</a></h3>
+      <p>Status: <strong>{{ submission.get_status_display }}</strong></p>
+      <p>
+        Submitter:
+        {% if submission.submitter %}
+          <a href="{% url 'accounts:profile' submission.submitter.username %}">{{ submission.submitter.username }}</a>
+        {% else %}
+          Unknown user
+        {% endif %}
+      </p>
+      <p class="muted">Captured: {{ submission.captured_at|date:'j M Y, g:i a'|default:'Not supplied' }}</p>
+      <p class="muted">Created: {{ submission.created_at|date:'j M Y, g:i a' }}</p>
+      <p>Flags raised: {{ submission.flag_count }}</p>
+      {% if submission.coordinate_string %}<p><code>{{ submission.coordinate_string }}</code></p>{% endif %}
+    </article>
+  {% empty %}
+    <div class="card"><p>No submissions matched your filters.</p></div>
+  {% endfor %}
+</div>
+{% endblock %}

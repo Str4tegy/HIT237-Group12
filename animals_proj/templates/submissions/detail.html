@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+{% block title %}Submission {{ submission.id }}{% endblock %}
+
+{% block content %}
+<section class="card">
+  <div class="section-heading">
+    <h2>Submission #{{ submission.id }}</h2>
+    <div class="actions">
+      {% if user.is_authenticated %}
+        <a class="button secondary" href="{% url 'moderation:flag-create' submission.id %}">Flag anomaly</a>
+      {% endif %}
+      {% if user.is_authenticated and submission.can_edit(user) %}
+        <a class="button" href="{% url 'submissions:update' submission.id %}">Edit</a>
+        <a class="button danger" href="{% url 'submissions:delete' submission.id %}">Delete</a>
+      {% endif %}
+    </div>
+  </div>
+  <p>Species: <a href="{{ submission.species.get_absolute_url }}">{{ submission.species }}</a></p>
+  <p>Status: <strong>{{ submission.get_status_display }}</strong></p>
+  <p>Confidence score: {{ submission.confidence|default:'Not supplied' }}</p>
+  <p>Submitter:
+    {% if submission.submitter %}
+      <a href="{% url 'accounts:profile' submission.submitter.username %}">{{ submission.submitter.username }}</a>
+    {% else %}
+      Unknown user
+    {% endif %}
+  </p>
+  {% if submission.coordinate_string %}
+    <p>Coordinates: <code id="submission-coords">{{ submission.coordinate_string }}</code></p>
+    <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('submission-coords').innerText)">Copy coordinates</button>
+  {% endif %}
+  <p>Captured at: {{ submission.captured_at|date:'j M Y, g:i a'|default:'Not supplied' }}</p>
+  <p>Created at: {{ submission.created_at|date:'j M Y, g:i a' }}</p>
+  {% if submission.audio %}
+    <div>
+      <audio controls preload="none" src="{{ submission.audio.url }}"></audio>
+    </div>
+  {% endif %}
+  {% if submission.notes %}<p>{{ submission.notes }}</p>{% endif %}
+</section>
+
+<section class="card">
+  <h3>Moderation history</h3>
+  {% if submission.flags.all %}
+    <ul>
+      {% for flag in submission.flags.all %}
+        <li>
+          {{ flag.created_at|date:'j M Y, g:i a' }} — reported by {{ flag.reporter|default:'Unknown' }} — {{ flag.get_decision_display }}
+        </li>
+      {% endfor %}
+    </ul>
+  {% else %}
+    <p>No flags have been raised for this submission.</p>
+  {% endif %}
+</section>
+{% endblock %}

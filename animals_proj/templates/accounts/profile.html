@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+
+{% block title %}Profile{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>{{ profile_user.username }}</h2>
+  <p>Role: <strong>{{ profile.get_role_display }}</strong></p>
+  <p>Verified: <strong>{{ profile.verified|yesno:'Yes,No' }}</strong></p>
+  {% if profile.affiliation %}
+    <p>Affiliation: {{ profile.affiliation }}</p>
+  {% endif %}
+  <p>Total submissions: {{ submission_count }}</p>
+</section>
+
+<section>
+  <div class="section-heading">
+    <h3>Recent submissions by {{ profile_user.username }}</h3>
+  </div>
+  {% if submissions %}
+    <div class="grid">
+      {% for submission in submissions %}
+        <article class="card">
+          <h4><a href="{{ submission.get_absolute_url }}">{{ submission.species }}</a></h4>
+          <p>Status: {{ submission.get_status_display }}</p>
+          <p>Flags: {{ submission.flag_count }}</p>
+          <p class="muted">{{ submission.created_at|date:'j M Y, g:i a' }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="card"><p>No submissions yet.</p></div>
+  {% endif %}
+</section>
+{% endblock %}

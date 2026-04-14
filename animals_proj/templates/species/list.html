@@ -1,0 +1,37 @@
+{% extends 'base.html' %}
+
+{% block title %}Species{% endblock %}
+
+{% block content %}
+<section class="card">
+  <div class="section-heading">
+    <h2>Species database</h2>
+    <p class="muted">Browse NT fauna species and use coordinate references in Google Maps.</p>
+  </div>
+  <form class="filters" method="get">
+    <input type="text" name="q" placeholder="Search common or scientific name" value="{{ query }}">
+    <select name="taxon_class">
+      <option value="">All classes</option>
+      {% for class_name in available_classes %}
+        <option value="{{ class_name }}" {% if class_name == taxon_class %}selected{% endif %}>{{ class_name }}</option>
+      {% endfor %}
+    </select>
+    <button type="submit">Filter</button>
+  </form>
+</section>
+
+<div class="grid">
+  {% for species in species_list %}
+    <article class="card">
+      <h3><a href="{{ species.get_absolute_url }}">{{ species }}</a></h3>
+      <p><em>{{ species.scientific_name }}</em></p>
+      <p>Class: {{ species.taxon_class|default:'Not supplied' }}</p>
+      <p>Conservation status: {{ species.conservation_status|default:'Not supplied' }}</p>
+      <p>Endemic: {{ species.is_endemic|yesno:'Yes,No' }}</p>
+      <p>Linked submissions: {{ species.submission_count }}</p>
+    </article>
+  {% empty %}
+    <div class="card"><p>No species matched your search.</p></div>
+  {% endfor %}
+</div>
+{% endblock %}

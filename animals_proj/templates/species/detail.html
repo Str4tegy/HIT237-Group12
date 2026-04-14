@@ -1,0 +1,42 @@
+{% extends 'base.html' %}
+
+{% block title %}{{ species }}{% endblock %}
+
+{% block content %}
+<section class="card">
+  <h2>{{ species.common_name|default:species.scientific_name }}</h2>
+  <p><em>{{ species.scientific_name }}</em></p>
+  <p>Class: {{ species.taxon_class|default:'Not supplied' }}</p>
+  <p>Conservation status: {{ species.conservation_status|default:'Not supplied' }}</p>
+  <p>Endemic: {{ species.is_endemic|yesno:'Yes,No' }}</p>
+  {% if species.coordinate_string %}
+    <p>Reference coordinates: <code id="species-coords">{{ species.coordinate_string }}</code></p>
+    <button type="button" onclick="navigator.clipboard.writeText(document.getElementById('species-coords').innerText)">Copy coordinates</button>
+  {% endif %}
+  {% if species.reference_url %}
+    <p><a href="{{ species.reference_url }}" target="_blank" rel="noreferrer">Reference source</a></p>
+  {% endif %}
+  {% if species.notes %}
+    <p>{{ species.notes }}</p>
+  {% endif %}
+</section>
+
+<section>
+  <div class="section-heading">
+    <h3>Recent linked submissions</h3>
+  </div>
+  {% if recent_submissions %}
+    <div class="grid">
+      {% for submission in recent_submissions %}
+        <article class="card">
+          <h4><a href="{{ submission.get_absolute_url }}">Submission #{{ submission.id }}</a></h4>
+          <p>Status: {{ submission.get_status_display }}</p>
+          <p class="muted">{{ submission.created_at|date:'j M Y, g:i a' }}</p>
+        </article>
+      {% endfor %}
+    </div>
+  {% else %}
+    <div class="card"><p>No submissions are linked to this species yet.</p></div>
+  {% endif %}
+</section>
+{% endblock %}

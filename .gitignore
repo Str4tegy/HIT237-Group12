@@ -1,32 +1,8 @@
-# Virtual environment
-env_my/
-.venv/
+/.venv
 venv/
-env/
-
-# Python
 __pycache__/
 *.py[cod]
-*$py.class
-
-# Django
 db.sqlite3
-*.log
-media/
-
-# IDEs
+.env
 .vscode/
 .idea/
-
-# Packages
-*.egg-info/
-build/
-dist/
-
-# Env files
-.env
-.env.*
-
-# OS
-Thumbs.db
-.DS_Store

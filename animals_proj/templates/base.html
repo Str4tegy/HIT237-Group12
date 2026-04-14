@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <title>{% block title %}Listening to NT's Disappearing Animals{% endblock %}</title>
+    <link rel="stylesheet" href="/static/css/site.css">
+  </head>
+  <body>
+    <header class="site-header">
+      <div class="container nav-row">
+        <div>
+          <a class="brand" href="/">Listening to NT's Disappearing Animals</a>
+          <p class="tagline">Acoustic biodiversity monitoring for the Northern Territory</p>
+        </div>
+        <nav>
+          <a href="/">Home</a>
+          <a href="{% url 'species:list' %}">Species</a>
+          <a href="{% url 'submissions:list' %}">Submissions</a>
+          {% if user.is_authenticated %}
+            <a href="{% url 'submissions:create' %}">Submit recording</a>
+            <a href="{% url 'accounts:my-profile' %}">My profile</a>
+            {% if can_access_moderation %}
+              <a href="{% url 'moderation:list' %}">Moderation</a>
+            {% endif %}
+            <form class="inline-form" method="post" action="{% url 'logout' %}">
+              {% csrf_token %}
+              <button type="submit">Log out</button>
+            </form>
+          {% else %}
+            <a href="{% url 'login' %}">Log in</a>
+            <a href="{% url 'accounts:register' %}">Register</a>
+          {% endif %}
+          <a href="/admin/">Admin</a>
+        </nav>
+      </div>
+    </header>
+
+    <main class="container">
+      {% if messages %}
+        <ul class="messages">
+          {% for message in messages %}
+            <li class="message {{ message.tags }}">{{ message }}</li>
+          {% endfor %}
+        </ul>
+      {% endif %}
+
+      {% block content %}{% endblock %}
+    </main>
+
+    {% block scripts %}{% endblock %}
+  </body>
+</html>
