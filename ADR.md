@@ -7,24 +7,24 @@ This file records the main architectural decisions for Assessment 2. Each entry 
 ## ADR 001: Split the system into focused Django apps
 
 **Status:** Accepted  
-**Date:** 2026-04-14
+**Last Edited:** 2026-04-15
 
 ### Context
-The project brief contains three distinct concerns: a fauna database, a submission workflow, and a moderation process. Keeping these concerns in a single app would make the code harder to reason about, harder to test, and more difficult for different group members to work on in parallel.
+The project plan outlined a website with several features, such as a database of fauna, user submissions, and moderation, etc. Before beginning work, a foundation on which to work on must be made in order for the individual members of the team to develop a cohesive program that respects the sections of the other developers.
 
 ### Alternatives considered
-1. **Single monolithic app**  
+1. **A single app**  
    - Pros: fewer files, simpler imports at the beginning  
-   - Cons: mixes unrelated responsibilities, increases coupling, harder to allocate team work
+   - Cons: mixes unrelated responsibilities, harder to allocate team work
 2. **Feature-based split into Django apps**  
-   - Pros: clearer ownership boundaries, easier URL separation, better reuse, fits Django conventions  
+   - Pros: clearer ownership boundaries, easier URL separation, fits Django conventions  
    - Cons: more files and cross-app imports to manage
 
 ### Decision
-Use separate Django apps for `species`, `submissions`, `accounts`, and `moderation`, with the project URL configuration composing them together.
+The webpage will be split into seperate Django apps. Modules will be imported as the features require, the seperate apps and sections to be split amongst the team to develop.
 
 ### Rationale
-This choice supports **loose coupling** and makes the architecture easier to explain during the walkthrough. It also aligns with the team role split in the brief: data model work, views/URLs, templates, and documentation can progress with fewer merge conflicts.
+The decision was made as it best reflects the requirements of the app and the skills of the developers. Django is a well documented structure that's modular model would fit the project's specific needs well, whilst also being topic that all the members of the development team have experience in.
 
 ### Code reference
 - `animals_proj/animals_proj/settings.py:13-24`
@@ -32,35 +32,36 @@ This choice supports **loose coupling** and makes the architecture easier to exp
 
 ### Consequences
 - Cross-app imports must be managed carefully.
-- The structure is easier to extend later, for example by adding data import commands or API endpoints.
-- The resulting codebase is clearer for ADR traceability and viva discussion.
+- The structure is easy to extend/alter later, especcially for changes to the aspects of the individual app.
+- The code is clearer for analysis and discussion.
 
 ---
 
 ## ADR 002: Use a profile model for verification and role-based permissions
 
 **Status:** Accepted  
-**Date:** 2026-04-14
+**Last Edited:** 2026-04-15
 
 ### Context
-The brief requires different behaviours for guests, citizen scientists, researchers, moderators, and admins. The team needed explicit and auditable role checks for submission creation and moderation review.
+The plan outlines several different actions a user can perform on the website that only certain groups of users should be allowed to do, such as making submissions or moderating them.
 
 ### Alternatives considered
 1. **Rely only on Django's built-in `is_staff` and `is_superuser` flags**  
-   - Pros: very little code  
-   - Cons: cannot represent verified researchers or citizen scientists clearly
+   - Pros: easy to implement
+   - Cons: cannot differentiate between the several sub-admin/moderator roles
 2. **Create a custom user model**  
-   - Pros: centralises role fields in the auth model  
-   - Cons: introduces more migration complexity late in the project
+   - Pros: centralises role fields
+   - Cons: higher complexity leads to more difficulty to implement
 3. **Use a separate `Profile` model linked to Django's `User` model**  
    - Pros: simpler than a custom user model, keeps authentication standard, supports explicit roles and verification  
    - Cons: requires profile lookups and profile creation handling
 
 ### Decision
-Use Django's built-in `User` model with a one-to-one `Profile` model containing `role` and `verified`, and enforce access through reusable permission mixins.
+Users and their permissions will be determined using Django's `User` model in combination with the `Profile` model to assign roles to particular users (such as verifief, scientist, etc.) via reuasable permission tags.
 
 ### Rationale
 This choice supports **explicit is better than implicit** because the access rules are written directly in model fields and mixins rather than hidden in scattered view logic. It also supports **DRY** because the same permission checks are reused across create, update, delete, and moderation views.
+The decision was made as it would be much easier to implement in the long run by assigning reusable permission tags using the inbuilt Django `User` models rather than indivudal role creation. It keeps the program's code concise and centralised, not repeating itself each time it is required.
 
 ### Code reference
 - `animals_proj/animals_proj/accounts/models.py:5-24`
@@ -68,36 +69,36 @@ This choice supports **explicit is better than implicit** because the access rul
 - `animals_proj/animals_proj/accounts/views.py:14-55`
 
 ### Consequences
-- Profiles must exist for authenticated users.
-- Admin verification becomes a visible part of the workflow.
-- The permission model is easier to justify in the live walkthrough.
+- Profiles must exist for verified users.
+- User permissions are easier to assign.
+- The permissions of any particular role are easy to alter and echo across the progam.
 
 ---
 
-## ADR 003: Model anomaly handling as a separate Flag workflow instead of a boolean on Submission
+## ADR 003: Model anomaly handling as a separate Flag workflow
 
 **Status:** Accepted  
-**Date:** 2026-04-14
+**Last Edited:** 2026-04-15
 
 ### Context
-The brief requires users to flag suspicious submissions and moderators to review them. A simple boolean such as `is_flagged` on `Submission` would not preserve who reported the issue, why it was reported, or how the moderator resolved it.
+A key feature of the program is the flagging feature, users can flag submissions for whatever reason to bring the attention of a moderator.
 
 ### Alternatives considered
 1. **Boolean flag on `Submission`**  
-   - Pros: minimal schema  
-   - Cons: no audit trail, no reason text, no reviewer history
+   - Pros: simple to implement, just a boolean trait such as `is_flagged` on submissions.
+   - Cons: would not retain as much info as ideal, such as who reported the submission, why, and any action taken
 2. **Store moderation notes directly on `Submission`**  
-   - Pros: fewer tables  
-   - Cons: mixes public submission data with moderation data and supports only one review history record
+   - Pros: simpler design
+   - Cons: mixes public submission data with moderation data jeopardising the security of potentiall sensitive information
 3. **Separate `Flag` model linked to `Submission`**  
    - Pros: supports multiple reports, moderation decisions, reviewer notes, and traceability  
    - Cons: adds another relationship and extra views/forms
 
 ### Decision
-Create a dedicated `Flag` model related to `Submission`, then use moderator views to apply review outcomes back to the submission status.
+Use a dedicated `Flag` model that is related to, but not directly connected, `Submission` that would only be visible to moderators, containing all the information related to the flaggin history of the post while remaining seperate to the public information.
 
 ### Rationale
-This design better represents the domain and preserves moderation history. It also improves object-oriented decomposition by keeping submission content separate from moderation activity.
+This design better reflects the project, favouring retaining information over a slim program, it allows for better moderation decision making and record keeping whilst keeping the moderation content seperate from the submisions.
 
 ### Code reference
 - `animals_proj/animals_proj/moderation/models.py:8-54`
@@ -105,33 +106,36 @@ This design better represents the domain and preserves moderation history. It al
 - `animals_proj/animals_proj/submissions/models.py:36-78`
 
 ### Consequences
-- More joins are required when displaying submission moderation history.
-- Moderation is easier to explain because each flag has a reporter, reason, decision, and reviewer.
-- Future extensions such as multiple flag categories or escalation states are easier to add.
+- More layers of movement to present a moderator with the flagging history of a submission.
+- Moderation is easier as important information is recorded for the moderator.
+- Future modifications to the flagging system will be easily rippled across the program.
 
 ---
 
 ## ADR 004: Use class-based views plus QuerySet helpers for list, detail, and CRUD behaviour
 
 **Status:** Accepted  
-**Date:** 2026-04-14
+**Last Edited:** 2026-04-15
 
 ### Context
 The application needs several repeated patterns: searchable list pages, detail pages, create/update/delete flows, and filtered recent activity. Writing all of these as function-based views would repeat logic for querying, pagination, and template wiring.
+An application with several pages, as described in the brief, would require several repeating elements, lists, detail pages, create/update/delete flows. Repeatedly making these features for each page would prove to be innefficient.
 
 ### Alternatives considered
-1. **Function-based views everywhere**  
+1. **Function-based views for each page**  
    - Pros: direct and flexible  
-   - Cons: more repeated boilerplate for CRUD patterns and list handling
+   - Cons: A lot of repetition for CRUD functions and list handling
 2. **Class-based generic views with custom QuerySet methods**  
-   - Pros: concise CRUD structure, reusable filtering, easier to keep behaviour consistent  
-   - Cons: requires stronger understanding of Django generics
+   - Pros: concise CRUD functions, reusable filtering, easier upholding of consistency
+   - Cons: requires stronger understanding of Django modelling
 
 ### Decision
 Use Django's generic class-based views for the core pages, combined with reusable QuerySet helpers such as `visible_to`, `for_owner`, and `search`.
+The project will integrate generic class-based views for the core pages whilst reusing QuerySet helpers across the code.
 
 ### Rationale
 This choice demonstrates a desirable Django pattern for the assessment. It also supports **DRY** by keeping common query behaviour in one place and improves maintainability as the app grows.
+This method, whilst requiring putting a bit more thought into development, will better adhere to the Django design philsophy DRY, improves future scalability.
 
 ### Code reference
 - `animals_proj/animals_proj/submissions/models.py:10-33`
@@ -140,41 +144,42 @@ This choice demonstrates a desirable Django pattern for the assessment. It also 
 - `animals_proj/animals_proj/views.py:7-18`
 
 ### Consequences
-- Developers need to understand Django's generic view lifecycle.
-- The project is easier to extend with pagination, filtering, and alternate templates.
-- The codebase provides stronger evidence of architectural understanding than a purely scaffolded procedural approach.
+- Developers require deeper understanding of Django.
+- Improves the future scalability of the project.
+- A consistent UI/page layout across the webpage improves cohesiveness.
 
 ---
 
 ## ADR 005: Provide live species lookup through a lightweight JSON autocomplete endpoint
 
 **Status:** Accepted  
-**Date:** 2026-04-14
+**Last Edited:** 2026-04-15
 
 ### Context
 The brief requires fauna search with live results during submission. The project needed a lightweight approach that works with server-rendered Django templates and does not require a full JavaScript framework.
+The search function of the project users require to sort through the submissions must update with live results as to improv the user exerience, as the project is quite complex alrady, a lightweight system would be ideal.
 
 ### Alternatives considered
 1. **Large static dropdown of all species**  
    - Pros: easy to implement  
-   - Cons: poor usability as the species list grows
+   - Cons: poor scalability with potentially growing lists of species
 2. **Separate dedicated search page**  
    - Pros: simple backend  
-   - Cons: breaks the submission flow and adds extra clicks
+   - Cons: breaks the user's flow, sacrificing the user experience through unnecessary interactions
 3. **JSON autocomplete endpoint consumed by a small template script**  
    - Pros: responsive UX, minimal JavaScript, works with the existing Django form  
    - Cons: requires one extra endpoint and client-side scripting
 
 ### Decision
-Expose a small JSON endpoint for species search and connect it to the submission form with lightweight JavaScript.
+Integrate a small JSON endpoint for species search that attaches to the submission form with minimal JavaScript.
 
 ### Rationale
-This keeps the implementation simple while satisfying the live-search requirement. It also keeps the design server-rendered and consistent with the rest of the application.
+The code is simple to integrate, doesn't sacrifice the speed of the program, appealing user experience
 
 ### Code reference
 - `animals_proj/animals_proj/species/views.py:51-67`
 - `animals_proj/templates/submissions/form.html:25-56`
 
 ### Consequences
-- JavaScript is still required for the live interaction.
-- The feature remains easy to understand and demo because the backend and frontend behaviour are both small and explicit.
+- JavaScript is required.
+- Feaature is otherwise easy to implement for the improved user experience.
