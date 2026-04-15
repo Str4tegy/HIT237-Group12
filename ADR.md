@@ -156,7 +156,6 @@ This method, whilst requiring putting a bit more thought into development, will 
 **Last Edited:** 2026-04-15
 
 ### Context
-The brief requires fauna search with live results during submission. The project needed a lightweight approach that works with server-rendered Django templates and does not require a full JavaScript framework.
 The search function of the project users require to sort through the submissions must update with live results as to improv the user exerience, as the project is quite complex alrady, a lightweight system would be ideal.
 
 ### Alternatives considered
@@ -183,3 +182,135 @@ The code is simple to integrate, doesn't sacrifice the speed of the program, app
 ### Consequences
 - JavaScript is required.
 - Feaature is otherwise easy to implement for the improved user experience.
+
+---
+
+## ADR 006: Keep templates in one main templates directory, with folders titled by relevant page
+
+**Status:** Accepted
+**Last Edited:** 2026-04-15
+
+### Context
+The project is planned to have multiple features: accounts, species, submissions, etc. To avoid confusion and scattered html files, they need to be structured in a way that keeps them easy to locate.
+
+### Alternatives considered
+1. Put all template files in one folder:
+ - Easy to do
+ - Simple to locate files
+ - The file becomes harder to navigate as more templates are added
+2. Template folders under each page folder with relevant templates inside
+ - Better follows Django design structure
+ - Was hard for the team to use because template and other file locations had already become inconsistent, resulting in issues
+
+### Decision
+A single main templates file directory was used, including subfolders for each feature/page. Django was configured to load templates from this directory. 
+
+### Rationale
+This offered easy reviewing and prevented repetition of files (DRY).
+
+### Code Reference
+-`animals_proj/animals_proj/settings.py:38-54`
+-`animals_proj/templates/accounts/register.html:1-12`
+-`animals_proj/templates/species/list.html:1-35`
+-`animals_proj/templates/submissions/detail.html:1-57`
+-`animals_proj/templates/moderation/list.html:1-35`
+
+### Consequences
+- Templates are easier to organise between group members
+
+---
+
+## ADR 007: Use ForeignKey with SET_NULL for Submission Relationships
+
+**Status:** Accepted  
+**Last Edited:** 2026-04-15
+
+### Context
+Retaining accurate information regarding endangered species is a essential in this project. Should any information regarding submissions be deleted (i.e. user deletes account) the rest of the information of the submission would, ideally, remain in the database.
+
+### Alternatives considered
+1. **Using Cascade**  
+   - Pros: easy to implement  
+   - Cons: deletes potentially crucial information
+
+### Decision
+Set the deleted information as null rather than deleting the entire submission.
+
+### Rationale
+This method will keep the information on the site to be referenced/reviewed (there is likely a reason that an account may be deleted and thus the submissions reviewed) whilst removing the user's information from the submission.
+
+### Code reference
+- `animals_proj/animals_proj/species/views.py:51-67`
+- `animals_proj/templates/submissions/form.html:25-56`
+
+### Consequences
+- All data regarding the submissions is retained.
+- Submissions with deleted information may appear incomplete/unreliable.
+
+---
+
+## ADR 008: Separate Species Model
+
+**Status:** Accepted  
+**Last Edited:** 2026-04-15
+
+### Context
+This project requires a consistent list of species that each submission can be attributed to, the species should be consistent otherwise sacrificing the consistency of the information organised.
+
+### Alternatives considered
+1. **Embed species names in the submission model**  
+   - Pros: simplified structure
+   - Cons: limits flexibility and scalability
+
+### Decision
+A dedicated Species model is used instead of storing species information as plain text within submissions.
+
+### Rationale
+This normalised design reduces duplication and ensures consistency across records for all species.
+
+### Code reference
+- `animals_proj/animals_proj/species/views.py:51-67`
+- `animals_proj/templates/submissions/form.html:25-56`
+
+### Consequences
+- Code is less repetitive.
+- Species are consistent across the submissions.
+
+---
+
+## ADR 009: Reorganise the project files into a consistent structure
+
+**Status:** Accepted
+**Last Edited:** 2026-04-15
+
+### Context:
+During development between team members, the project files became split across different folders, and files were scattered within unnecessary folders in the repository. This caused confusion about which files were active. It also created problems with templates not loading properly and made the project harder to test and work on.
+
+### Alternatives considered:
+1. Keep existing structure and fix the broken files
+ - Could be the fastest option
+ - Took extensive work to resolve issues
+2. Delete everything and rebuild from the start
+ - Would create a clean structure
+ - Would lose useful work already completed
+3. Reorganise the existing files into one clear project structure
+ - Keeps useful work
+ - Fixes confusion and makes the project easier to manage
+ - Could be difficult to implement
+
+### Decision:
+The project files were reorganised into one clear Django structure. Older or duplicate folders that were no longer part of the working version were removed or no longer used. Templates, apps, and settings were aligned so Django would load the correct files.
+
+### Rationale
+This approach would be most optimal because it solved the existing structural issues without wasting the progress already made. This was the best balance between fixing the immediate problems and keeping useful sections. A cleaner structure also makes it easier for group members to understand where files belong, making the code easier to maintain and update.
+
+### Code Refrence:
+ - `animals_proj/animals_proj/settings.py`
+ - `animals_proj/templates/`
+ - `animals_proj/species/`
+ - `animals_proj/submissions/`
+ - `animals_proj/accounts/`
+ - `animals_proj/moderation/`
+
+### Consequences:
+- This made the project easier to follow and fixed errors caused by duplicate or misplaced files. The tradeoff is that reorganising files took extra time and required checking imports, template paths, and URLs carefully after the changes.
